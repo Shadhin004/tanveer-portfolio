@@ -24,7 +24,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  /* display: flex; */
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -66,3 +66,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.gh-chart-container {
+  width: 100%;
+  max-width: 600px; /* Optional: Set a max width to prevent the chart from becoming too large */
+  margin: 0 auto;   /* Centers the container */
+}
+
+.gh-chart {
+  width: 100%;      /* Makes the image fill the container */
+  height: auto;     /* Maintains aspect ratio */
+}
+

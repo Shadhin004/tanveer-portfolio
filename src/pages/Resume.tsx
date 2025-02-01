@@ -1,29 +1,52 @@
 import React from 'react'
+import html2pdf from 'html2pdf.js';
 
 const Resume = () => {
+
+    const downloadPDF = () => {
+        const element = document.getElementById('pdf-content');
+        var opt = {
+          margin:       [0,0,0,0],
+          filename:     'myfile.pdf',
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS : true, backgroundColor : '#fafafa' },
+          jsPDF:        { unit: 'mm', orientation: 'portrait', format : 'a4' },
+          pagebreak: { mode: ['legacy', 'css'] }
+        };
+    
+        html2pdf().from(element).set(opt).toContainer().save();
+      };
+
     return (
-        <div className="main-wrapper">
+        <div className="main-wrappers" id="resume-section">
             <section className="cta-section theme-bg-light py-5">
-                <div className="container text-center single-col-max-width">
+                <div className="containers text-center single-col-max-width" style={{margin : "auto"}}>
                     <h2 className="heading mb-3">Online Resume</h2>
-                    <a className="btn btn-primary" href="https://themes.3rdwavemedia.com/resources/sketch-template/resume-sketch-sketch-resume-template-for-software-developers/" target="_blank"><i className="fas fa-file-pdf mr-2"></i>Download PDF Version</a>
+                    <button className="btn btn-primary" onClick={downloadPDF}><i className="fas fa-file-pdf mr-2"></i>Download PDF Version</button>
 
 
                 </div>
             </section>
-            <div className="container px-3 px-lg-5">
-                <article className="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg" >
+            <div className="container px-3 px-lg-5 my-5 mb-5" style={{backgroundColor : '#fafafa !important'}}>
+                <article className="resume-wrapper mx-auto theme-bg-light p-5 shadow-lg" id='pdf-content' style={{
+                    // pageBreakAfter : 'always',
+                    // pageBreakBefore : 'always',
+                    // breakBefore : 'always',
+                    // breakAfter : 'always'
+                    // width:'210mm',
+                    
+                }}>
                     <div className="resume-header">
                         <div className="row align-items-center">
-                            <div className="resume-title col-12 col-md-6 col-lg-8 col-xl-9">
+                            <div className="resume-title col-12 col-md-6 col-lg-7 col-xl-8">
                                 <h2 className="resume-name mb-0 text-uppercase">Tanveer Khan</h2>
                                 <div className="resume-tagline mb-3 mb-md-0">Software Engineer</div>
                             </div>
-                            <div className="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
+                            <div className="resume-contact col-12 col-md-6 col-lg-5 col-xl-4">
                                 <ul className="list-unstyled mb-0">
-                                    <li className="mb-2"><i className="fas fa-phone-square fa-fw fa-lg mr-2 "></i><a className="resume-link" href="tel:#">+358 41722 5412</a></li>
-                                    <li className="mb-2"><i className="fas fa-envelope-square fa-fw fa-lg mr-2"></i><a className="resume-link" href="mailto:#">shadhin.abc@gmail.com</a></li>
-                                    <li className="mb-2"><i className="fas fa-globe fa-fw fa-lg mr-2"></i><a className="resume-link" href="#">www.tanveer-khan.dev</a></li>
+                                    <li className="mb-2"><i className="fas fa-phone-square fa-fw fa-lg mr-2 "></i><a className="resume-link" href="tel:+358 41722 5412">+358 41722 5412</a></li>
+                                    <li className="mb-2"><i className="fas fa-envelope-square fa-fw fa-lg mr-2"></i><a className="resume-link" href="mailto:shadhin.abc@gmail.com">shadhin.abc@gmail.com</a></li>
+                                    <li className="mb-2"><i className="fas fa-globe fa-fw fa-lg mr-2"></i><a className="resume-link" target='_blank' href="https://www.tanveer-khan.dev">www.tanveer-khan.dev</a></li>
                                     <li className="mb-0"><i className="fas fa-map-marker-alt fa-fw fa-lg mr-2"></i>Vaasa, Finland</li>
                                 </ul>
                             </div>
@@ -48,13 +71,24 @@ const Resume = () => {
                                     <h3 className="text-uppercase resume-section-heading mb-4">Work Experiences</h3>
                                     <div className="item mb-3">
                                         <div className="item-heading row align-items-center mb-2">
-                                            <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Software Engineer</h4>
-                                            <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"><a target='_blank' href="https://www.kontorva.com/">KontorVA</a> | Jan 2024 - Present</div>
+                                            <h4 className="item-title col-12 col-md-6 col-lg-7 mb-2 mb-md-0">Software Engineer</h4>
+                                            <div className="item-meta col-12 col-md-6 col-lg-5 text-muted text-left text-md-right"><a target='_blank' href="https://www.kontorva.com/">KontorVA</a> | Jan 2024 - Present</div>
 
                                         </div>
                                         <div className="item-content">
 
-                                            <ul className="resume-list">
+                                            <ul className="resume-list" 
+                                            style={{
+                                                display: 'block',
+                                                listStyleType: 'disc',
+                                                marginBlockStart: '1em',
+                                                marginBlockEnd: '1em',
+                                                marginInlineStart: '0px',
+                                                marginInlineEnd: '0px',
+                                                paddingInlineStart: '40px',
+                                                unicodeBidi: 'isolate'
+                                            }}
+                                            >
                                                 <li> Led integration efforts between React.js frontend and Django backend systems, optimizing performance and data flow.</li>
                                                 <li>Collaborated with cross-functional teams to ensure seamless communication and real-time interactions.</li>
                                                 <li>Proficient in troubleshooting frontend-backend integration issues.</li>
@@ -65,13 +99,24 @@ const Resume = () => {
                                     </div>
                                     <div className="item mb-3">
                                         <div className="item-heading row align-items-center mb-2">
-                                            <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Software Engineer</h4>
-                                            <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"><a target='_blank' href="https://atb-lab.jp/">atB Lab Ltd.</a> | Dec 2021 - Sep 2023</div>
+                                            <h4 className="item-title col-12 col-md-6 col-lg-7 mb-2 mb-md-0">Software Engineer</h4>
+                                            <div className="item-meta col-12 col-md-6 col-lg-5 text-muted text-left text-md-right"><a target='_blank' href="https://atb-lab.jp/">atB Lab Ltd.</a> | Dec 2021 - Sep 2023</div>
 
                                         </div>
                                         <div className="item-content">
                                             {/* <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Donec pede justo, fringilla vel.</p> */}
-                                            <ul className="resume-list">
+                                            <ul className="resume-list"
+                                            style={{
+                                                display: 'block',
+                                                listStyleType: 'disc',
+                                                marginBlockStart: '1em',
+                                                marginBlockEnd: '1em',
+                                                marginInlineStart: '0px',
+                                                marginInlineEnd: '0px',
+                                                paddingInlineStart: '40px',
+                                                unicodeBidi: 'isolate'
+                                            }}
+                                            >
                                                 <li> Proficient in utilizing React.js technology to develop innovative and responsive user interfaces, ensuring an optimal user experience for clients.</li>
                                                 <li>Demonstrated ability to translate client requirements into actionable software solutions, employing agile methodologies to deliver projects on time and within budget.</li>
                                                 <li>Skilled in collaborating with cross-functional teams including product managers, designers, and QA analysts to ensure alignment of software solutions with client expectations and project goals.</li>
@@ -80,20 +125,65 @@ const Resume = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div className="item mb-3">
+
+                                    <div className="item mb-3" style={{
+                                        pageBreakInside : 'avoid'
+                                    }}>
                                         <div className="item-heading row align-items-center mb-2">
-                                            <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Web Developer</h4>
-                                            <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"><a target="_blank" href='http://www.clubg1it.com.bd/'>ClubG1 IT</a> | Feb 2020 - Nov 2021</div>
+                                            <h4 className="item-title col-12 col-md-6 col-lg-7 mb-2 mb-md-0">Camera Operator</h4>
+                                            <div className="item-meta col-12 col-md-6 col-lg-5 text-muted text-left text-md-right"><a target="_blank" href='http://www.clubg1it.com.bd/'>Kansallisarkisto</a> | Oct 2023 - Present</div>
 
                                         </div>
                                         <div className="item-content">
-                                            <ul className="resume-list">
+                                            <ul className="resume-list"
+                                            style={{
+                                                display: 'block',
+                                                listStyleType: 'disc',
+                                                marginBlockStart: '1em',
+                                                marginBlockEnd: '1em',
+                                                marginInlineStart: '0px',
+                                                marginInlineEnd: '0px',
+                                                paddingInlineStart: '40px',
+                                                unicodeBidi: 'isolate',
+                                            }}
+                                            >
+                                                <li> Digitized over 10,000 archive records by photographing and converting them into searchable PDFs, ensuring
+                                                data accessibility.</li>
+                                                <li>Maintained and calibrated digitization equipment, reducing downtime by 15% through regular troubleshooting
+                                                and proactive upkeep.</li>
+                                                <li>Managed digital archiving projects, meeting deadlines and ensuring compliance with preservation standards.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div className="item mb-3" style={{
+                                        pageBreakInside : 'avoid',
+                                        marginTop : '10px'
+                                    }}>
+                                        <div className="item-heading row align-items-center mb-2">
+                                            <h4 className="item-title col-12 col-md-6 col-lg-7 mb-2 mb-md-0">Web Developer</h4>
+                                            <div className="item-meta col-12 col-md-6 col-lg-5 text-muted text-left text-md-right"><a target="_blank" href='http://www.clubg1it.com.bd/'>ClubG1 IT</a> | Feb 2020 - Nov 2021</div>
+
+                                        </div>
+                                        <div className="item-content">
+                                            <ul className="resume-list"
+                                            style={{
+                                                display: 'block',
+                                                listStyleType: 'disc',
+                                                marginBlockStart: '1em',
+                                                marginBlockEnd: '1em',
+                                                marginInlineStart: '0px',
+                                                marginInlineEnd: '0px',
+                                                paddingInlineStart: '40px',
+                                                unicodeBidi: 'isolate',
+                                            }}
+                                            >
                                                 <li> Collaborated cross-functionally to develop and implement WordPress themes and plugins, meeting client requirements and project goals.</li>
                                                 <li>Designed and implemented custom WordPress templates and page layouts, optimizing site performance and user engagement.</li>
                                                 <li>Proficient in troubleshooting and resolving frontend-backend integration issues within the WordPress ecosystem.</li>
                                                 <li>Stayed abreast of WordPress updates and best practices, implementing new features and optimizations to improve website functionality and performance.</li>
-                                                <li>Provided technical guidance and support to team members, ensuring consistent quality and adherence to project timelines.</li>
-                                                <li>Delivered high-quality software solutions that meet or exceed client expectations, with a focus on scalability, performance, and maintainability.</li>
+                                                {/* <li>Provided technical guidance and support to team members, ensuring consistent quality and adherence to project timelines.</li>
+                                                <li>Delivered high-quality software solutions that meet or exceed client expectations, with a focus on scalability, performance, and maintainability.</li> */}
                                             </ul>
                                         </div>
                                     </div>
@@ -104,12 +194,23 @@ const Resume = () => {
                                     <h3 className="text-uppercase resume-section-heading mb-4">Education</h3>
                                     <div className="item mb-3">
                                         <div className="item-heading row align-items-center mb-2">
-                                            <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Full Stack Development Program</h4>
-                                            <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"><a target="_blank" href='https://www.integrify.io/'>Integrify</a> | Jun 2024 - Oct 2024</div>
+                                            <h4 className="item-title col-12 col-md-6 col-lg-7 mb-2 mb-md-0">Full Stack Development Program</h4>
+                                            <div className="item-meta col-12 col-md-6 col-lg-5 text-muted text-left text-md-right"><a target="_blank" href='https://www.integrify.io/'>Integrify</a> | Jun 2024 - Oct 2024</div>
 
                                         </div>
                                         <div className="item-content">
-                                            <ul className="resume-list">
+                                            <ul className="resume-list"
+                                            style={{
+                                                display: 'block',
+                                                listStyleType: 'disc',
+                                                marginBlockStart: '1em',
+                                                marginBlockEnd: '1em',
+                                                marginInlineStart: '0px',
+                                                marginInlineEnd: '0px',
+                                                paddingInlineStart: '40px',
+                                                unicodeBidi: 'isolate'
+                                            }}
+                                            >
                                                 <li> Gaining hands-on experience in building web applications using .NET technologies and modern JavaScript frameworks.</li>
                                                 <li>Learning to integrate cloud services (Azure) for scalable deployments and database management.</li>
                                                 <li>Developing proficiency in React for building responsive, dynamic front-end interfaces.</li>
@@ -119,12 +220,23 @@ const Resume = () => {
                                     </div>
                                     <div className="item">
                                         <div className="item-heading row align-items-center mb-2">
-                                            <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Bachelor's in Computer Science and Engineering</h4>
-                                            <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"><a target='_blank' href="https://istt.edu.bd/">ISTT</a> | Jan 2016 - Jan 2020 </div>
+                                            <h4 className="item-title col-12 col-md-6 col-lg-7 mb-2 mb-md-0">Bachelor's in Computer Science</h4>
+                                            <div className="item-meta col-12 col-md-6 col-lg-5 text-muted text-left text-md-right"><a target='_blank' href="https://istt.edu.bd/">ISTT</a> | Jan 2016 - Jan 2020 </div>
 
                                         </div>
                                         <div className="item-content">
-                                            <ul className="resume-list">
+                                            <ul className="resume-list"
+                                            style={{
+                                                display: 'block',
+                                                listStyleType: 'disc',
+                                                marginBlockStart: '1em',
+                                                marginBlockEnd: '1em',
+                                                marginInlineStart: '0px',
+                                                marginInlineEnd: '0px',
+                                                paddingInlineStart: '40px',
+                                                unicodeBidi: 'isolate'
+                                            }}
+                                            >
                                                 <li> Completed a Bachelor’s degree in Computer Science and Engineering, with a focus on programming languages, data structures and algorithms.</li>
                                                 <li>Acquired in-depth knowledge of computer science principles, including computer architecture, operating systems, and computer networks.</li>
                                                 <li>Developed strong problem-solving and critical thinking skills through coursework and hands-on projects.</li>
@@ -144,6 +256,27 @@ const Resume = () => {
 
                                         </div>
                                     </div> */}
+                                </section>
+                                <section className="project-section py-3">
+                                    <h3 className="text-uppercase resume-section-heading mb-4">Reference</h3>
+                                    <ul className="list-unstyled resume-interests-list mb-0">
+                                        <li className="mb-2">
+                                            <p>
+                                                <b>Niina Virdi</b> <br/>
+                                                Team Lead at <b>Kansallisarkisto</b> <br />
+                                                niina.virdi@kansallisarkisto.fi <br />
+                                                (+358) 405772105                                            
+                                            </p>
+                                        </li>
+                                        <li className="mb-2">
+                                            <p>
+                                                <b>Sandeep S. Virdi</b> <br/>
+                                                Manager, Offering Port folio Management and Development at <b>Wartsila</b> <br />
+                                                sandeep.virdi@wartsila.com <br />
+                                                (+358) 456991117                                          
+                                            </p>
+                                        </li>
+                                    </ul>
                                 </section>
                             </div>
                             <aside className="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4">
@@ -171,8 +304,8 @@ const Resume = () => {
                                         </ul>
                                     </div>
                                 </section>
-                                <section className="education-section py-3">
-                                    <h3 className="text-uppercase resume-section-heading mb-4">Awards</h3>
+                                <section className="education-section py-3" style={{pageBreakInside : 'avoid'}} >
+                                    <h3 className="text-uppercase resume-section-heading mb-4">Certificates</h3>
                                     <ul className="list-unstyled resume-awards-list">
                                         <li className="mb-3">
                                             <div className="font-weight-bold">Full Stack Software Development</div>
@@ -195,17 +328,42 @@ const Resume = () => {
                                     <h3 className="text-uppercase resume-section-heading mb-4">Interests</h3>
                                     <ul className="list-unstyled resume-interests-list mb-0">
                                         <li className="mb-2">Climbing</li>
-                                        <li className="mb-2">Snowboarding</li>
+                                        <li className="mb-2">Hiking</li>
                                         <li className="mb-2">Photography</li>
                                         <li>Travelling</li>
                                     </ul>
                                 </section>
+                                {/* <section className="skills-section py-3">
+                                    <h3 className="text-uppercase resume-section-heading mb-4">Reference</h3>
+                                    <ul className="list-unstyled resume-interests-list mb-0">
+                                        <li className="mb-2">
+                                            <p>
+                                                <b>Niina Virdi</b> <br/>
+                                                Team Lead at <b>Kansallisarkisto</b> <br />
+                                                niina.virdi@kansallisarkisto.fi <br />
+                                                (+358) 405772105                                            
+                                            </p>
+                                        </li>
+                                        <li className="mb-2">
+                                            <p>
+                                                <b>Sandeep S. Virdi</b> <br/>
+                                                Manager, Offering Port folio Management and Development at <b>Wartsila</b> <br />
+                                                sandeep.virdi@wartsila.com <br />
+                                                (+358) 456991117                                          
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </section> */}
 
                             </aside>
                         </div>
                     </div>
                     <hr />
-                    <div className="resume-footer text-center">
+                    <div className="resume-footer text-center" style={
+                        {
+                            marginTop : '10px'
+                        }
+                    }>
                         <ul className="resume-social-list list-inline mx-auto mb-0 d-inline-block text-muted">
                             <li className="list-inline-item mb-lg-0 mr-3"><a className="resume-link" href="#"><i className="fab fa-github-square fa-2x mr-2" data-fa-transform="down-4"></i><span className="d-none d-lg-inline-block text-muted">github.com/Shadhin004</span></a></li>
                             <li className="list-inline-item mb-lg-0 mr-3"><a className="resume-link" href="#"><i className="fab fa-linkedin fa-2x mr-2" data-fa-transform="down-4"></i><span className="d-none d-lg-inline-block text-muted">linkedin.com/in/md-tanveer-khan</span></a></li>
@@ -216,9 +374,9 @@ const Resume = () => {
 
             </div>
 
-            <footer className="footer text-center py-4">
+            {/* <footer className="footer text-center py-4">
                 <small className="copyright">Template Copyright &copy; <a href="https://themes.3rdwavemedia.com/" target="_blank">3rd Wave Media</a></small>
-            </footer>
+            </footer> */}
 
         </div>
     )
